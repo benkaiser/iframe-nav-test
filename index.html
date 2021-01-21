@@ -1,0 +1,26 @@
+<html>
+  <head></head>
+  <body>
+    <script type="text/javascript">
+      const iframe = document.createElement('iframe');
+      iframe.src = '/page1.html';
+      iframe.height = '500px';
+      iframe.width = '500px';
+      function openiframe(noPush) {
+        if (!noPush) {
+          history.pushState({}, '', '/#iframeOpen');
+        }
+        document.body.appendChild(iframe);
+      }
+
+      window.onpopstate = function(event) {
+        document.body.removeChild(iframe);
+      };
+
+      if (window.location.hash.includes('iframeOpen')) {
+        openiframe(true);
+      }
+    </script>
+    <button onClick="openiframe()">Open iFrame</button>
+  </body>
+</html>
